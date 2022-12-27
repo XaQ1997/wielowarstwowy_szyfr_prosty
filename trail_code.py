@@ -45,19 +45,24 @@ class TrailCode:
 			for j in range(len(self.keyword)):
 				if self.keyword[j]==self.keycode[i]:
 					result+=tmp[j]
+					
+		result = f"{count} \n{result}"
 		
-		return result, count
+		return result
 	
-	def decode(self, text, count):
+	def decode(self, text):
+		count = int(text[:text.index("\n")])
+		temp=text[count-2:]
+		
 		tmp=[]
 		result=""
 		
 		for i in range(len(self.keyword)):
 			for j in range(len(self.keycode)):
 				if self.keycode[j]==self.keyword[i]:
-					tmp.append(text[j*len(text)//len(self.keyword): (j+1)*len(text)//len(self.keyword)])
+					tmp.append(temp[j*len(temp)//len(self.keyword): (j+1)*len(temp)//len(self.keyword)])
 		
-		for i in range(len(text)-count):
+		for i in range(len(temp)-count):
 			result+=tmp[i%len(self.keyword)][i//len(self.keyword)]
 		
 		return result
@@ -113,18 +118,23 @@ class AntiTrailCode:
 				if self.keyword[j] == self.keycode[i]:
 					result += tmp[j]
 		
-		return result, count
+		result=f"{count} \n{result}"
+		
+		return result
 	
-	def decode(self, text, count):
+	def decode(self, text):
+		count=int(text[:text.index("\n")])
+		temp=text[count-2:]
+		
 		tmp = []
 		result = ""
 		
 		for i in range(len(self.keyword)):
 			for j in range(len(self.keycode)):
 				if self.keycode[j] == self.keyword[i]:
-					tmp.append(text[j * len(text) // len(self.keyword): (j + 1) * len(text) // len(self.keyword)])
+					tmp.append(temp[j * len(temp) // len(self.keyword): (j + 1) * len(temp) // len(self.keyword)])
 		
-		for i in range(len(text) - count):
+		for i in range(len(temp) - count):
 			result += tmp[i % len(self.keyword)][i // len(self.keyword)]
 		
 		return result
@@ -193,18 +203,23 @@ class SynchronousTrailCode:
 				if self.keyword[j] == self.keyc[i]:
 					result += tmp[j]
 		
-		return result, count
+		result=f"{count} \n{result}"
+		
+		return result
 	
-	def decode(self, text, count):
+	def decode(self, text):
+		count=int(text[:text.index("\n")])
+		temp=text[count-2:]
+		
 		tmp = []
 		result = ""
 		
 		for i in range(len(self.keyword)):
 			for j in range(len(self.keyc)):
 				if self.keyc[j] == self.keyword[i]:
-					tmp.append(text[j * len(text) // len(self.keyword): (j + 1) * len(text) // len(self.keyword)])
+					tmp.append(temp[j * len(temp) // len(self.keyword): (j + 1) * len(temp) // len(self.keyword)])
 		
-		for i in range(len(text) - count):
+		for i in range(len(temp) - count):
 			length=i//len(self.keyword)
 			rest=i%len(self.keyword)
 			if length%(2*self.keycode)<self.keycode:
@@ -284,18 +299,23 @@ class AsynchronousTrailCode:
 				if self.keyword[j] == self.keycode[i]:
 					result += tmp[j]
 		
-		return result, count
+		result=f"{count} \n{result}"
+		
+		return result
 	
-	def decode(self, text, count):
+	def decode(self, text):
+		count=int(text[:text.index("\n")])
+		temp=text[count-2:]
+		
 		tmp = []
 		result = ""
 		
 		for i in range(len(self.keyword)):
 			for j in range(len(self.keycode)):
 				if self.keycode[j] == self.keyword[i]:
-					tmp.append(text[j * len(text) // len(self.keyword): (j + 1) * len(text) // len(self.keyword)])
+					tmp.append(temp[j * len(temp) // len(self.keyword): (j + 1) * len(temp) // len(self.keyword)])
 		
-		for i in range(len(text) - count):
+		for i in range(len(temp) - count):
 			length = i // len(self.keyword)
 			rest = i % len(self.keyword)
 			if length % self.length < self.direction[0]:

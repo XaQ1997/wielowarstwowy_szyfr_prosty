@@ -3,6 +3,9 @@ class HuffmanCode:
 		pass
 	
 	def encode(self, text):
+		if text=="":
+			return text
+		
 		tmp=text.split(" ")
 		dictio={}
 		
@@ -70,6 +73,9 @@ class HuffmanCode:
 		return result
 	
 	def decode(self, text):
+		if text=="":
+			return text
+		
 		tmp=text.split("\n")
 		
 		info=tmp[len(tmp)-1].split(" ")

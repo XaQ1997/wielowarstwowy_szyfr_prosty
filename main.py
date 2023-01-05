@@ -6,13 +6,12 @@ from fake_letter_code import *
 from fence_code import *
 from huffman_code import *
 from inversion_code import *
-from keyboard_code import *
 from letter_word_code import *
 from shuttle_code import *
 from trail_code import *
 
 if __name__=="__main__":
-	text="1101 0010 0110000110 01 1 0011"
+	text=""
 	
 	text=text.upper()
 	
@@ -51,7 +50,8 @@ if __name__=="__main__":
 		5,
 		35,
 		5,
-		7
+		7,
+		"344343"
 	]
 	
 	keycode_to_keyboard_code={
@@ -265,9 +265,28 @@ if __name__=="__main__":
 		ConversionCode(4),
 		ConversionCode(3),
 		ConversionCode(2),
+		CompressionCode(keycodes[35])
 	]
 	
-	encode=QuadrupleCompressionCode().encode(text)
-	decode=QuadrupleCompressionCode().decode(encode)
+	print(text)
+	print("Szyfrowanie w warstwie 1")
+	encodings={code_covers[0].name(): code_covers[0].encode(text)}
+	print(encodings[code_covers[0].name()])
 	
-	exit
+	for i in range(1, len(code_covers)):
+		print(f"Szyfrowanie w warstwie {i+1}")
+		encodings[code_covers[i].name()]=code_covers[i].encode(encodings[code_covers[i-1].name()])
+		print(encodings[code_covers[i].name()])
+	
+	print(f"Deszyfrowanie w warstwie {len(code_covers)}")
+	decodings={
+		code_covers[len(code_covers)-1].name(): code_covers[len(code_covers)-1].decode(encodings[len(code_covers)-1])
+	}
+	print(decodings[code_covers[len(code_covers)-1].name()])
+	
+	for i in range(len(code_covers)-1, 0 ,-1):
+		print(f"Deszyfrowanie w warstwie {i}")
+		decodings[code_covers[i].name()]=code_covers[i].decode(decodings[code_covers[i+1].name()])
+		print(decodings[code_covers[i]])
+	
+	print(f"\n{decodings[code_covers[0].name()]}")

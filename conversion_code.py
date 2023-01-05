@@ -59,6 +59,9 @@ class NumberLetterConversion:
 				tmp=""
 		
 		return result
+	
+	def name(self):
+		return "number to letter conversion code"
 
 class ConversionCode:
 	def __init__(self, system):
@@ -81,7 +84,8 @@ class ConversionCode:
 				if is_zero==True:
 					result+=tmp[i][j]
 			
-			result+=Convert(self.system).count_to(int(tmp[i]))
+			if tmp[i]!="":
+				result+=Convert(self.system).count_to(int(tmp[i]))
 		
 		return result
 	

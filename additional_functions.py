@@ -1,4 +1,6 @@
 from math import *
+from sys import *
+setrecursionlimit(10**6)
 
 def division(value, divide=1):
 	return (value//divide, value%divide)

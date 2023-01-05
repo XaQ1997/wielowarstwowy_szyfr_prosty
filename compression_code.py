@@ -33,7 +33,7 @@ class ConstCompressionCode:
 				length+=1
 				tmp+=text[i]
 			
-			if (len(pair[0])!=0 and len(pair[1])!=0) or i==len(text)-1:
+			if len(pair[0])!=0 and (len(pair[1])!=0 or i==len(text)-1):
 				if i==len(text)-1:
 					pair[mod%2]=tmp
 				
@@ -2749,12 +2749,15 @@ class TripleCompressionCode(ConstCompressionCode):
 		return "triple compression code"
 
 class CompressionCode:
-	def __init__(self, keycode, onces=10000, riffle=0.5, multiple=250):
+	def __init__(self, keycode, onces=10, riffle=0.5, multiple=2.5):
 		self.keycode=keycode
 		self.onces=onces
 		self.values={"riffle": riffle, "multiple": multiple}
 	
 	def encode(self, text):
+		if (text.find(" ")>len(text) or text.find(" ")<0) and len(text)<int(self.keycode[0]):
+			return text
+		
 		tmp=[text]
 		result=""
 		base_memory=len(text)
@@ -2768,7 +2771,6 @@ class CompressionCode:
 					tmp.append(QuadrupleCompressionCode().encode(tmp[j+i*self.onces]))
 			
 			count=0
-			min=base_memory
 			
 			for j in range(self.onces):
 				if len(tmp[i*self.onces+j])<self.values["riffle"]*base_memory:
@@ -2789,7 +2791,17 @@ class CompressionCode:
 		return result
 	
 	def decode(self, text):
-		pass
+		values=text.split("\n")
+		count=int(values[0])
+		tmp=values[1]
+		
+		for i in range(count, 0, -1):
+			if self.keycode[i%len(self.keycode)]=="3":
+				tmp=TripleCompressionCode().decode(tmp)
+			if self.keycode[i%len(self.keycode)]=="4":
+				tmp=QuadrupleCompressionCode().decode(tmp)
+		
+		return tmp
 	
 	def name(self):
 		return "compression code"

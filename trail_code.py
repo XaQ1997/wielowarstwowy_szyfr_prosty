@@ -25,6 +25,9 @@ class TrailCode:
 					self.keycode[j+1]=tmp
 	
 	def encode(self, text):
+		if text=="":
+			return text
+		
 		tmp=[]
 		
 		for i in range(len(self.keyword)):
@@ -51,6 +54,9 @@ class TrailCode:
 		return result
 	
 	def decode(self, text):
+		if text=="":
+			return text
+		
 		count = int(text[:text.index("\n")])
 		temp=text[count-2:]
 		
@@ -97,6 +103,9 @@ class AntiTrailCode:
 					self.keycode[j + 1] = tmp
 	
 	def encode(self, text):
+		if text=="":
+			return text
+		
 		tmp = []
 		
 		for i in range(len(self.keyword)):
@@ -123,6 +132,9 @@ class AntiTrailCode:
 		return result
 	
 	def decode(self, text):
+		if text=="":
+			return text
+		
 		count=int(text[:text.index("\n")])
 		temp=text[count-2:]
 		
@@ -172,6 +184,9 @@ class SynchronousTrailCode:
 					self.keyc[j + 1] = tmp
 	
 	def encode(self, text):
+		if text=="":
+			return text
+		
 		tmp = []
 		
 		for i in range(len(self.keyword)):
@@ -208,6 +223,9 @@ class SynchronousTrailCode:
 		return result
 	
 	def decode(self, text):
+		if text=="":
+			return text
+		
 		count=int(text[:text.index("\n")])
 		temp=text[count-2:]
 		
@@ -268,6 +286,9 @@ class AsynchronousTrailCode:
 					self.keycode[j + 1] = tmp
 	
 	def encode(self, text):
+		if text=="":
+			return text
+		
 		tmp = []
 		
 		for i in range(len(self.keyword)):
@@ -304,6 +325,9 @@ class AsynchronousTrailCode:
 		return result
 	
 	def decode(self, text):
+		if text=="":
+			return text
+		
 		count=int(text[:text.index("\n")])
 		temp=text[count-2:]
 		

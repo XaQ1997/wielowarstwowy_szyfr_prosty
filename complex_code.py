@@ -60,7 +60,7 @@ class ComplexCode:
 		return "complex code"
 
 class MixedComplexCode:
-	def __init__(self, tech, start_amplitude=1, start_phase=0):
+	def __init__(self, start_amplitude=1, start_phase=0):
 		self.amplitude=start_amplitude
 		self.phase=start_phase
 		

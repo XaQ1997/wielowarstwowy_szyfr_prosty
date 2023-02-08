@@ -18,6 +18,9 @@ class BasicShuttleCode:
 		return result
 	
 	def decode(self, text):
+		if text=="":
+			return text
+		
 		result=""
 		
 		half=len(text)//2
@@ -96,6 +99,9 @@ class InWordShuttleWord:
 		return str.join(" ", result)
 	
 	def decode(self, text):
+		if text=="":
+			return text
+		
 		tmp=text.split(" ")
 		result=[]
 		
@@ -103,7 +109,7 @@ class InWordShuttleWord:
 			result.append("")
 			half=len(tmp[i])//2
 			
-			for j in range(half+1):
+			for j in range(half):
 				result[i]+=tmp[i][half-j]
 				
 				if half+j<len(tmp[i]) and j!=0:

@@ -57,8 +57,15 @@ class TrailCode:
 		if text=="":
 			return text
 		
-		count = int(text[:text.index("\n")])
-		temp=text[count-2:]
+		count=0
+		
+		if text.find("\n")>0:
+			count = int(text[:text.find("\n")])
+		
+		if count>0:
+			temp=text[count:]
+		else:
+			temp=text
 		
 		tmp=[]
 		result=""
@@ -68,7 +75,7 @@ class TrailCode:
 				if self.keycode[j]==self.keyword[i]:
 					tmp.append(temp[j*len(temp)//len(self.keyword): (j+1)*len(temp)//len(self.keyword)])
 		
-		for i in range(len(temp)-count):
+		for i in range((len(temp)-count)-1):
 			result+=tmp[i%len(self.keyword)][i//len(self.keyword)]
 		
 		return result
@@ -135,8 +142,15 @@ class AntiTrailCode:
 		if text=="":
 			return text
 		
-		count=int(text[:text.index("\n")])
-		temp=text[count-2:]
+		count = 0
+		
+		if text.find("\n") > 0:
+			count = int(text[:text.find("\n")])
+		
+		if count > 0:
+			temp = text[count:]
+		else:
+			temp = text
 		
 		tmp = []
 		result = ""
@@ -146,7 +160,7 @@ class AntiTrailCode:
 				if self.keycode[j] == self.keyword[i]:
 					tmp.append(temp[j * len(temp) // len(self.keyword): (j + 1) * len(temp) // len(self.keyword)])
 		
-		for i in range(len(temp) - count):
+		for i in range((len(temp) - count)-2):
 			result += tmp[i % len(self.keyword)][i // len(self.keyword)]
 		
 		return result
@@ -226,8 +240,15 @@ class SynchronousTrailCode:
 		if text=="":
 			return text
 		
-		count=int(text[:text.index("\n")])
-		temp=text[count-2:]
+		count = 0
+		
+		if text.find("\n") > 0:
+			count = int(text[:text.find("\n")])
+		
+		if count > 0:
+			temp = text[count:]
+		else:
+			temp = text
 		
 		tmp = []
 		result = ""
@@ -237,7 +258,7 @@ class SynchronousTrailCode:
 				if self.keyc[j] == self.keyword[i]:
 					tmp.append(temp[j * len(temp) // len(self.keyword): (j + 1) * len(temp) // len(self.keyword)])
 		
-		for i in range(len(temp) - count):
+		for i in range((len(temp) - count)-2):
 			length=i//len(self.keyword)
 			rest=i%len(self.keyword)
 			if length%(2*self.keycode)<self.keycode:
@@ -328,8 +349,15 @@ class AsynchronousTrailCode:
 		if text=="":
 			return text
 		
-		count=int(text[:text.index("\n")])
-		temp=text[count-2:]
+		count = 0
+		
+		if text.find("\n") > 0:
+			count = int(text[:text.find("\n")])
+		
+		if count > 0:
+			temp = text[count:]
+		else:
+			temp = text
 		
 		tmp = []
 		result = ""
@@ -339,7 +367,7 @@ class AsynchronousTrailCode:
 				if self.keycode[j] == self.keyword[i]:
 					tmp.append(temp[j * len(temp) // len(self.keyword): (j + 1) * len(temp) // len(self.keyword)])
 		
-		for i in range(len(temp) - count):
+		for i in range((len(temp) - count)-1):
 			length = i // len(self.keyword)
 			rest = i % len(self.keyword)
 			if length % self.length < self.direction[0]:

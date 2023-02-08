@@ -2749,7 +2749,7 @@ class TripleCompressionCode(ConstCompressionCode):
 		return "triple compression code"
 
 class CompressionCode:
-	def __init__(self, keycode, onces=10, riffle=0.5, multiple=2.5):
+	def __init__(self, keycode, onces=1000, riffle=0.5, multiple=250):
 		self.keycode=keycode
 		self.onces=onces
 		self.values={"riffle": riffle, "multiple": multiple}
@@ -2759,7 +2759,6 @@ class CompressionCode:
 			return text
 		
 		tmp=[text]
-		result=""
 		base_memory=len(text)
 		min=0
 		
@@ -2788,9 +2787,12 @@ class CompressionCode:
 		
 		result=f"{min} \n{tmp[min]}"
 		
-		return result
+		return result, tmp
 	
 	def decode(self, text):
+		if text=="":
+			return text
+		
 		values=text.split("\n")
 		count=int(values[0])
 		tmp=values[1]

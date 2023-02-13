@@ -92,5 +92,10 @@
     3,
     2,
     344343
-  ]
+  ],
+  "compressing": {
+    "onces": 1000,
+    "riffle": 0.5,
+    "multiple": 250
+  }
 }

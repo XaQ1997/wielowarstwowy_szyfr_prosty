@@ -15,9 +15,10 @@ from shuttle_code import *
 from trail_code import *
 
 class Coder:
-	def __init__(self, code_covers, depth):
+	def __init__(self, code_covers, encoding, depth):
 		try:
 			self.code_covers=code_covers
+			self.encoding=encoding
 			self.depth=depth
 		except depth>len(code_covers):
 			raise "ERROR!"
@@ -37,13 +38,13 @@ class Coder:
 		for i in range(self.depth):
 			with open(f"{dst_path}/layer_{i+1}.txt", "w") as layer:
 				if self.code_covers[i].name()=="compression code":
-					text, lines=self.code_covers[i].encode(text)
+					text, lines=self.code_covers[i].encode(text.encode(self.encoding))
 					
 					for i in range(len(lines)):
 						with open(f"{dst_path}/compressing_results/{i}.txt", "x") as result:
 							result.write(lines[i])
 				else:
-					text=self.code_covers[i].encode(text)
+					text=self.code_covers[i].encode(text.encode(self.encoding))
 				layer.write(text)
 			
 			with open(f"{dst_path}/coder_length.csv", "a+", newline="") as length:
@@ -53,9 +54,10 @@ class Coder:
 		return text
 
 class Decoder:
-	def __init__(self, code_covers, depth):
+	def __init__(self, code_covers, encoding, depth):
 		try:
 			self.code_covers=code_covers
+			self.encoding=encoding
 			self.depth=depth
 		except depth>len(code_covers):
 			raise "ERROR!"
@@ -70,7 +72,7 @@ class Decoder:
 			filewriter.writerow([f"{self.depth}", f"{datetime.now()}"])
 		
 		for i in range(self.depth):
-			text = self.code_covers[i].decode(text)
+			text = self.code_covers[i].decode(text.encode(self.encoding))
 			
 			with open(f"{path}/decoder_length.csv", "a+", newline="") as length:
 				filewriter = csv.writer(length, delimiter=";")

@@ -17,30 +17,36 @@ class GroupInversionCode:
 	
 	def encode(self, text):
 		tmp=[]
-		place=0
 		rest=len(text)%self.keycode
 		
-		tmp.append(str(rest)+"\n")
+		tmp.append(f"{rest} \n")
 		
-		while place<=len(text):
-			tmp.append((text[place:place+self.keycode:])[::-1])
+		for i in range(len(text)//self.keycode):
+			tmp.append((text[i*self.keycode:(i+1)*self.keycode])[::-1])
 		
-			place+=self.keycode
+		tmp.append((text[len(text)-rest:len(text)])[::-1])
 		
 		return str.join("", tmp)
 	
 	def decode(self, text):
+		text=text[::-1]
 		tmp=[]
-		rest=int(text[:text.index("\n")])
-		temp=text[text.index("\n")+1:]
+		r=0
+		
+		for i in range(len(text)):
+			if text[i]=="\n":
+				r=i
+				break
+		
+		rest=int(text[:r-1])
+		temp=text[r+1:len(text)]
 		
 		tmp.append(temp[:rest])
-		place=rest
 		
-		while place <= len(text):
-			tmp.append((text[place:place + self.keycode:])[::-1])
-			
-			place += self.keycode
+		for i in range(len(text)//self.keycode):
+			tmp.append((text[i*self.keycode:(i+1)*self.keycode])[::-1])
+		
+		tmp.append((text[len(text)-rest:len(text)])[::-1])
 		
 		return str.join("", tmp)
 	

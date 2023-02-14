@@ -24,7 +24,7 @@ class Coder:
 			raise "ERROR!"
 	
 	def run(self, src_path, dst_path):
-		with open(src_path) as src:
+		with open(src_path, encoding=self.encoding) as src:
 			text=src.read()
 		
 		with open(f"{dst_path}/layer_0.txt", "w") as layer0:
@@ -36,15 +36,15 @@ class Coder:
 			filewriter.writerow(["0", f"{len(text)}", f"{datetime.now()}"])
 		
 		for i in range(self.depth):
-			with open(f"{dst_path}/layer_{i+1}.txt", "w") as layer:
+			with open(f"{dst_path}/layer_{i+1}.txt", "w", encoding=self.encoding) as layer:
 				if self.code_covers[i].name()=="compression code":
-					text, lines=self.code_covers[i].encode(text.encode(self.encoding))
+					text, lines=self.code_covers[i].encode(text)
 					
 					for i in range(len(lines)):
 						with open(f"{dst_path}/compressing_results/{i}.txt", "x") as result:
 							result.write(lines[i])
 				else:
-					text=self.code_covers[i].encode(text.encode(self.encoding))
+					text=self.code_covers[i].encode(text)
 				layer.write(text)
 			
 			with open(f"{dst_path}/coder_length.csv", "a+", newline="") as length:
@@ -63,7 +63,7 @@ class Decoder:
 			raise "ERROR!"
 	
 	def run(self, path):
-		with open(f"{path}/layer_{self.depth}.txt") as src:
+		with open(f"{path}/layer_{self.depth}.txt", encoding=self.encoding) as src:
 			text=src.read()
 		
 		with open(f"{path}/decoder_length.csv", "w", newline="") as length:
@@ -72,7 +72,7 @@ class Decoder:
 			filewriter.writerow([f"{self.depth}", f"{datetime.now()}"])
 		
 		for i in range(self.depth):
-			text = self.code_covers[i].decode(text.encode(self.encoding))
+			text = self.code_covers[i].decode(text)
 			
 			with open(f"{path}/decoder_length.csv", "a+", newline="") as length:
 				filewriter = csv.writer(length, delimiter=";")

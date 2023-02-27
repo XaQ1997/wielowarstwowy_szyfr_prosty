@@ -132,8 +132,8 @@ class Standard:
 				layer=BasicInversionCode()
 			if self.code_covers[i]["ABBR"]=="DIC":
 				layer=DoubleInversionCode()
-			if self.code_covers[i]["ABBR"]=="GIC":
-				layer=GroupInversionCode(self.code_covers[i]["keycodes"])
+			if self.code_covers[i]["ABBR"]=="CGIC":
+				layer=ConstGroupInversionCode(self.code_covers[i]["keycodes"])
 			if self.code_covers[i]["ABBR"]=="WIC":
 				layer=WordInversionCode()
 			if self.code_covers[i]["ABBR"]=="SIC":

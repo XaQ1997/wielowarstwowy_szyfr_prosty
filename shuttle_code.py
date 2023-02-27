@@ -116,5 +116,6 @@ class InWordShuttleWord:
 					result[i]+=tmp[i][half+j]
 		
 		return str.join(" ", result)
+	
 	def name(self):
 		return "basic in-word shuttle code"

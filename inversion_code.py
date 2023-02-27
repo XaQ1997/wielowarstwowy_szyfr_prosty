@@ -11,7 +11,7 @@ class BasicInversionCode:
 	def name(self):
 		return "basic inversion code"
 
-class GroupInversionCode:
+class ConstGroupInversionCode:
 	def __init__(self, key):
 		self.keycode=key
 	
@@ -19,41 +19,20 @@ class GroupInversionCode:
 		tmp=[]
 		rest=len(text)%self.keycode
 		
-		tmp.append(f"{rest} \n")
-		
 		for i in range(len(text)//self.keycode):
-			tmp.append((text[i*self.keycode:(i+1)*self.keycode])[::-1])
+			tmp.append(text[i*self.keycode:(i+1)*self.keycode][::-1])
 		
 		tmp.append((text[len(text)-rest:len(text)])[::-1])
 		
 		return str.join("", tmp)
 	
 	def decode(self, text):
-		text=text[::-1]
-		tmp=[]
-		r=0
-		
-		for i in range(len(text)):
-			if text[i]=="\n":
-				r=i
-				break
-		
-		rest=int(text[:r-1])
-		temp=text[r+1:len(text)]
-		
-		tmp.append(temp[:rest])
-		
-		for i in range(len(text)//self.keycode):
-			tmp.append((text[i*self.keycode:(i+1)*self.keycode])[::-1])
-		
-		tmp.append((text[len(text)-rest:len(text)])[::-1])
-		
-		return str.join("", tmp)
+		return self.encode(text)
 	
 	def name(self):
 		return f"group inversion code with key {self.keycode}"
 
-class DoubleInversionCode(GroupInversionCode):
+class DoubleInversionCode(ConstGroupInversionCode):
 	def __init__(self):
 		self.keycode=2
 		super().__init__(self.keycode)

@@ -8,8 +8,10 @@ if __name__=="__main__":
 	code_covers=values["code covers"]
 	encoding=values["encoding"]
 	
-	coder=Coder(code_covers, encoding, 3)
-	decoder=Decoder(code_covers, encoding, 3)
+	covering=13
+	
+	coder=Coder(code_covers, encoding, covering)
+	decoder=Decoder(code_covers, encoding, covering)
 	
 	coder.run("zrodlo.txt", "wyniki")
 	text=decoder.run("wyniki")

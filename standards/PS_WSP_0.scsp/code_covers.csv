@@ -1,7 +1,7 @@
 layer|ABBR|keycodes
 1|BIC|
 2|DIC|
-3|GIC|7
+3|CGIC|7
 4|WIC|
 5|SIC|
 6|RFLC|
@@ -29,8 +29,8 @@ layer|ABBR|keycodes
 28|RGIC|
 29|NLC|
 30|KC|
-31|GIC|7
-32|GIC|5
+31|CGIC|7
+32|CGIC|5
 33|FC|35
 34|CC|9
 35|CC|8
@@ -43,8 +43,8 @@ layer|ABBR|keycodes
 42|iC|math 1 0
 43|NLC|
 44|KC|
-45|GIC|5
-46|GIC|7
+45|CGIC|5
+46|CGIC|7
 47|FC|35
 48|CC|9
 49|CC|8
@@ -57,8 +57,8 @@ layer|ABBR|keycodes
 56|MiC|1 0
 57|NLC|
 58|KC|
-59|GIC|35
-60|GIC|5
+59|CGIC|35
+60|CGIC|5
 61|FC|7
 62|CC|9
 63|CC|8
@@ -71,8 +71,8 @@ layer|ABBR|keycodes
 70|SiC|math 1 0
 71|NLC|
 72|KC|
-73|GIC|5
-74|GIC|35
+73|CGIC|5
+74|CGIC|35
 75|FC|7
 76|CC|9
 77|CC|8
@@ -85,8 +85,8 @@ layer|ABBR|keycodes
 84|MSiC|1 0
 85|NLC|
 86|KC|
-87|GIC|7
-88|GIC|35
+87|CGIC|7
+88|CGIC|35
 89|FC|5
 90|CC|9
 91|CC|8
@@ -99,8 +99,8 @@ layer|ABBR|keycodes
 98|HC|
 99|NLC|
 100|KC|
-101|GIC|35
-102|GIC|7
+101|CGIC|35
+102|CGIC|7
 103|FC|5
 104|CC|9
 105|CC|8

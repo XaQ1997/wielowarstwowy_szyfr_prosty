@@ -63,19 +63,21 @@ class Decoder:
 			raise "ERROR!"
 	
 	def run(self, path):
+		text=[]
+		
 		with open(f"{path}/layer_{self.depth}.txt", encoding=self.encoding) as src:
-			text=src.read()
+			text.append(src.read())
 		
 		with open(f"{path}/decoder_length.csv", "w", newline="") as length:
 			filewriter=csv.writer(length, delimiter=";")
 			filewriter.writerow(["layer", "time"])
 			filewriter.writerow([f"{self.depth}", f"{datetime.now()}"])
 		
-		for i in range(self.depth):
-			text = self.code_covers[i].decode(text)
+		for i in range(1, self.depth+1):
+			text.append(self.code_covers[self.depth-i].decode(text[i-1]))
 			
 			with open(f"{path}/decoder_length.csv", "a+", newline="") as length:
 				filewriter = csv.writer(length, delimiter=";")
-				filewriter.writerow([f"{self.depth-i-1}", f"{datetime.now()}"])
+				filewriter.writerow([f"{self.depth-i}", f"{datetime.now()}"])
 		
-		return text
+		return text[len(text)-1]
